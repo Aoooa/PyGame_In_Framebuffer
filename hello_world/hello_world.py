@@ -1,3 +1,11 @@
+'''
+Author: your name
+Date: 2021-02-16 09:20:40
+LastEditTime: 2021-02-16 10:26:30
+LastEditors: Please set LastEditors
+Description: In User Settings Edit
+FilePath: /undefined/home/aoooa/PyGame_In_Framebuffer/hello_world/hello_world.py
+'''
 import os
 import time
 import random
@@ -52,27 +60,25 @@ class pyscope :
     def __del__(self):
         "Destructor to make sure pygame shuts down, etc."
  
-    def test(self):
-        # Fill the screen with red (255, 0, 0)
-        red = (255, 0, 0)
-        self.screen.fill(red)
-
-        box = pygame.draw.rect(self.screen, (0, 200, 0), (140, 0, 20, 10))
-
-
+    def show(self):
+        pygame.mouse.set_visible(False)
+        white = (255, 255, 255)
+        black = (0, 0, 0)
+        fontObj = pygame.font.Font('SIMYOU.TTF',32)
+        img = pygame.image.load('linux_icon.jpeg')
+        imgbox = pygame.draw.rect(self.screen, (255, 255, 255), (0, 32, 240, 103))
+        textbox = pygame.draw.rect(self.screen, (255, 255, 255), (0, 0, 176, 32))
+        textSurfaceObj = fontObj.render('Hello world!',True,black,white)
+        self.screen.fill(white)
+        self.screen.blit(img,imgbox)
+        self.screen.blit(textSurfaceObj,textbox)
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    print("Pos: %sx%s\n" % pygame.mouse.get_pos())
-                    if box.collidepoint(pygame.mouse.get_pos()):
-                        pygame.quit()
-                        sys.exit()
-                        # Update the display
             pygame.display.update()
  
 # Create an instance of the PyScope class
 scope = pyscope()
-scope.test()
+scope.show()
